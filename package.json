@@ -1,21 +1,21 @@
 {
-  "name": "reveal.js",
+  "name": "widget-iframe",
   "version": "2.6.2",
-  "description": "The HTML Presentation Framework",
-  "homepage": "http://lab.hakim.se/reveal-js",
-  "subdomain": "revealjs",
+  "description": "How to Build an Easy Embeddable Widget with Iframes",
+  "homepage": "http://github.com/gbrassey/slides-widget-iframe",
+  "subdomain": "widget-iframe",
   "scripts": {
     "test": "grunt test",
     "start": ""
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
+    "name": "George Brassey",
+    "email": "gbrassey@gmail.com",
+    "web": "http://www.gbrassey.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/gbrassey/slides-widget-iframe.git"
   },
   "engines": {
     "node": "~0.8.0"
