@@ -50,8 +50,16 @@
 				</section>
 
 				<section>
+					<h2>Me</h2>
+					<ul>
+						<li>Developer at The Mechanism</li>
+						<li>Full Stack — JavaScript, PHP and a little ruby</li>
+					</ul>
+				</section>
+
+				<section>
 					<h2>Bug Tracker</h2>
-					<h3>Front end widget for collecting bugs — fly trap</h3>
+					<h3>Fly trap — Front end widget for collecting bugs</h3>
 					<ul>
 						<li>Simple interface for clients to comunicate issues</li>
 						<li>Provides additional information, such as:
@@ -65,18 +73,41 @@
 				</section>
 
 				<section>
+					<h2>What is a Widget?</h2>
+					<ul>
+						<li>An embedded service
+							<ul>
+								<li>Facebook <em>like</em> buttons</li>
+								<li><a href="https://dev.twitter.com/web/embedded-timelines" target="_blank">Twitter</a></li>
+								<li>Battle for the Internet — <a href="https://www.netflix.com" target="_blank">Netflix</a>, <a href="http://www.meetup.com" target="_blank">Meetup.com</a> and more</li>
+							</ul>
+						</li>
+						<li>Modular — Deploy once / use many times</li>
+					</ul>
+				</section>
+
+				<section>
 					<h2>Requirements</h2>
 					<ul>
-						<li>Unobtrusive
+						<li>Unobtrusive with dynamic interaction
 							<ul>
 								<li>Hide when not in use</li>
 								<li>Slide into place when called</li>
 							</ul>
 						</li>
-						<li>Outside the flow of the DOM</li>
 						<li>Responsive</li>
+						<li>Outside the flow of the DOM</li>
 						<li>Sandboxed so that it doesn’t cause any conflicts with the project DOM, JS or CSS</li>
-						<li>Deploy once and implemente across many projects</li>
+						<li>Context Aware: the widget needs to receive infomation from the container</li>
+						<li>Deploy on a unique server and implement across many projects</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Lingo</h2>
+					<ul>
+						<li><span class="fragment highlight-red">Service:</span> The bug collector in the iframe</li>
+						<li><span class="fragment highlight-green">Parent:</span> Container or the project under tracking</li>
 					</ul>
 				</section>
 
@@ -84,35 +115,25 @@
 					<h2>Design</h2>
 					<ul>
 						<li>Bug tracker sits inconspicuosly in the bottom left corner</li>
-						<li>Dynamic — form slides into view when necessary</li>
-						<li>Fixed to the bottom left corner of the viewport</li>
+						<li>Dynamic — widget slides into view when necessary</li>
 						<li>Responsive to fit on all device sizes</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Iframe</h2>
-					<h3>Create instance of child document within the context of the parent</h3>
-					<ul>
-						<li>Parent: Project under bug tracking</li>
-						<li>Child: Bug tracking widget</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>Iframes — The Good</h2>
 					<ul>
-						<li>Sandboxes - protects from conflict and spillover</li>
+						<li>Sandboxed - protects from conflict and spillover</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>Iframes — The Bad</h2>
 					<ul>
-						<li>Cross-origin policy blocks communication between parent and child documents</li>
-						<ul>
-							<li>Unable to receive necessary information from the child</li>
-						</ul>
+						<li>Same-origin policy blocks communication between parent and child documents when service is loaded from another domain</li>
+							<ul>
+								<li>Unable to receive necessary information from the child</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -126,10 +147,10 @@
 				</section>
 
 				<section>
-					<h2>Remote Procedure Call (RPC) and easyXDM</h2>
+					<h2>Remote Procedure Call and easyXDM</h2>
 					<ul>
-						<li><a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a> — protocol for <q>remote invocation</q></li>
-						<li><a href="http://easyxdm.net">easyXDM</a> — a library that leverages RPC for cross origin communication between parent and child
+						<li><a href="http://en.wikipedia.org/wiki/Remote_procedure_call">Remote Procedure Call</a> (RPC) — protocol for <q>remote invocation</q></li>
+						<li><a href="http://easyxdm.net">easyXDM</a> — a library that leverages RPC for cross origin communication between documents
 							<ul>
 								<li>Methods can be made open to the other context</li>
 								<li>Eg. The child can initiate a method which will run in the parent and wait for return value</li>
@@ -139,29 +160,17 @@
 				</section>
 
 				<section>
-					<h2>Using easyXDM</h2>
-					<ul>
-						<li>In our parent we load a script from our bug tracker server
-							<ul>
-								<li>AJAX easyXDM library for use in our parent context</li>
-							</ul>
-						</li>
-						<li>Instantiate an RPC instance with methods to be used by the child</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Creating the Iframe</h2>
+					<h2>Embedding the Iframe</h2>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// Create iframe container
 var iframeContainer = document.createElement('div');
-
 document.getElementsByTagName('body')[0].appendChild(iframeContainer);
 
+// Create RPC instance
 var rpc = new easyXDM.Rpc({
 	remote: 'http://www.example.com/my-iframe',
 	container: iframeContainer,
 	props: {
-		id: 'bug-iframe',
 		frameborder: '0',
 		scrolling: 'no',
 		allowTransparency: 'true',
@@ -174,35 +183,31 @@ var rpc = new easyXDM.Rpc({
 },
 {
 	local: {
-        parentInfo: function () {
-        	return {
-        		width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-        		height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-        		url: window.location.href
-        	};
-        }
-    }
+		parentInfo: function () {
+			return {
+				width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+				height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+				url: window.location.href
+			};
+		}
+	}
 });
 					</code></pre>
 				</section>
 
 				<section>
-					<h2>... And on the child side</h2>
+					<h2>... And on the service side</h2>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
 var rpc = new easyXDM.Rpc({},
 {
     remote: {
-        resizeiFrame: {},
         parentInfo: {}
     }
 });
 
-.
-.
-.
-
 rpc.parentInfo(function(parentInfo) {
-    var diagObject = {
+    // do something with...
+    diagnosticInfo = {
         'width' = parentInfo.width,
         'height' = parentInfo.height,
         'url' = parentInfo.url
@@ -212,29 +217,51 @@ rpc.parentInfo(function(parentInfo) {
 				</section>
 
 				<section>
-					<h2>Why is Cross Domain Important?</h2>
+					<h2>Demonstration</h2>
+				</section>
+
+				<section>
+					<h2>Why Cross Domain and Iframes?</h2>
+					<h3>Card UI</h3>
+					<img width="831" height="442" src="images/card-ui.png" alt="Card UI">
+				</section>
+
+				<section>
+					<h2>What is Card UI?</h2>
+					<ul>
+						<li><a href="http://www.subtraction.com/2014/08/26/what-is-a-card/">Card UI</a> is a growing design pattern
+							<ul>
+								<li><a href="http://www.pinterest.com/khoi/card-user-interfaces/" target="_blank">Pinterest</a></li>
+								<li>Twitter</li>
+								<li>Google Now</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Google Now</h2>
+					<img width="400" height="640" src="images/google-now.jpg" alt="google now">
+				</section>
+
+				<section>
+					<h2>Why is Card UI important?</h2>
 					<ul>
 						<li>Can be used to embed foreign services within your website, webapp, native app</li>
-						<li>Context aware services will be better when they can communicate with their parent</li>
+						<li>No standard exists and current implementations are difficult</li>
+						<li>Context aware services will be better when they can communicate with their container</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>Further Reading</h2>
-					<img width="831" height="442" src="images/card-ui.png" alt="Card UI">
 					<ul>
-						<li><a href="http://www.subtraction.com/2014/08/26/what-is-a-card/">Card UI</a> is a common design pattern
-							<ul>
-								<li>Twitter</li>
-								<li>Pinterest</li>
-								<li>Google Now</li>
-							</ul>
-						</li>
 						<li><a href="http://cardstack.io">cardstack.io</a> is an open source initiative to create a Card Ecosystem
 							<ul>
 								<li><a href="https://github.com/tildeio/oasis.js">Oasis.js</a> — <q>A lightweight library for embedding untrusted content and exposing capabilities</q></li>
 							</ul>
 						</li>
+						<li><a href="" target="_blank">Google Polymer</a> — a library built on Web Components for creating custom elements</li>						
 					</ul>
 				</section>
 
@@ -279,6 +306,18 @@ rpc.parentInfo(function(parentInfo) {
 				]
 			});
 
+		</script>
+	
+		<script type="text/javascript">
+			setTimeout(
+				function(){
+					var a = document.createElement("script");
+					var b = document.getElementsByTagName("script")[0];
+					a.src = "http://arcane-coast-4951.herokuapp.com/mech-bug-tracker.js?projectID=5";
+					a.async = true;
+					a.type = "text/javascript";
+					b.parentNode.insertBefore(a,b)
+			}, 1);
 		</script>
 
 	</body>
