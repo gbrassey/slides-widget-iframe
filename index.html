@@ -6,8 +6,8 @@
 
 		<title>How to Build an Easy Embedabble Widget</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="How to Build an Easy Embeddable Widget">
+		<meta name="author" content="George Brassey">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -50,289 +50,199 @@
 				</section>
 
 				<section>
-					<h2>Iframes</h2>
+					<h2>Bug Tracker</h2>
+					<h3>Front end widget for collecting bugs — fly trap</h3>
 					<ul>
-						<li>Like a window onto another website</li>
-						<li>Once set up, creating multiple instances linking to your service is easy to do</li>
-					</ul>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
-					<h2>Bug Tracking</h2>
-					<p>
-						Client facing bug tracking
-					</p>
-					<ul>
-						<li>Simple to embed and easy to implement across many projects</li>
-						<li>Sandboxed so that it doesn’t cause any conflicts with the project DOM, JS or CSS/li>
-						<li>Simple architecture which works on all browsers</li>
-						<li>Responsive; it must work on all device sizes and form factors</li>
-						<li>Context Aware; diagnostic information will require knowledge of the parent document (the website under bug tracking)</li>
+						<li>Simple interface for clients to comunicate issues</li>
+						<li>Provides additional information, such as:
+							<ul>
+								<li>Screen Size</li>
+								<li>Operating System</li>
+								<li>Browser information</li>
+							</ul>
+						</li>
 					</ul>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
-				</section>
-
-				<section>
-					<h2>Marvelous Unordered List</h2>
+					<h2>Requirements</h2>
 					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
+						<li>Unobtrusive
+							<ul>
+								<li>Hide when not in use</li>
+								<li>Slide into place when called</li>
+							</ul>
+						</li>
+						<li>Outside the flow of the DOM</li>
+						<li>Responsive</li>
+						<li>Sandboxed so that it doesn’t cause any conflicts with the project DOM, JS or CSS</li>
+						<li>Deploy once and implemente across many projects</li>
 					</ul>
 				</section>
 
 				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  For those of you who like that sort of thing.
-						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?#/themes">Default</a> -
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> <br>
-						<a href="?theme=moon#/themes">Moon</a> -
-						<a href="?theme=solarized#/themes">Solarized</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
+					<h2>Design</h2>
+					<ul>
+						<li>Bug tracker sits inconspicuosly in the bottom left corner</li>
+						<li>Dynamic — form slides into view when necessary</li>
+						<li>Fixed to the bottom left corner of the viewport</li>
+						<li>Responsive to fit on all device sizes</li>
+					</ul>
 				</section>
 
 				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the background.
-					</p>
+					<h2>Iframe</h2>
+					<h3>Create instance of child document within the context of the parent</h3>
+					<ul>
+						<li>Parent: Project under bug tracking</li>
+						<li>Child: Bug tracking widget</li>
+					</ul>
 				</section>
 
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
+				<section>
+					<h2>Iframes — The Good</h2>
+					<ul>
+						<li>Sandboxes - protects from conflict and spillover</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Iframes — The Bad</h2>
+					<ul>
+						<li>Cross-origin policy blocks communication between parent and child documents</li>
+						<ul>
+							<li>Unable to receive necessary information from the child</li>
+						</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>HTML5 postMessage</h2>
+					<ul>
+						<li>Method to send messages between documents</li>
+						<li>New specification. Does not work on older browsers</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Remote Procedure Call (RPC) and easyXDM</h2>
+					<ul>
+						<li><a href="http://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a> — protocol for <q>remote invocation</q></li>
+						<li><a href="http://easyxdm.net">easyXDM</a> — a library that leverages RPC for cross origin communication between parent and child
+							<ul>
+								<li>Methods can be made open to the other context</li>
+								<li>Eg. The child can initiate a method which will run in the parent and wait for return value</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Using easyXDM</h2>
+					<ul>
+						<li>In our parent we load a script from our bug tracker server
+							<ul>
+								<li>AJAX easyXDM library for use in our parent context</li>
+							</ul>
+						</li>
+						<li>Instantiate an RPC instance with methods to be used by the child</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Creating the Iframe</h2>
 					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
+var iframeContainer = document.createElement('div');
 
-				<section>
-					<section data-background="#007777">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#007777"</code> on a slide to change the full page background to the given color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Repeated Image Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-				</section>
+document.getElementsByTagName('body')[0].appendChild(iframeContainer);
 
-				<section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
-					<h2>Background Transitions</h2>
-					<p>
-						Pass reveal.js the <code>backgroundTransition: 'slide'</code> config argument to make backgrounds slide rather than fade.
-					</p>
-				</section>
-
-				<section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
-					<h2>Background Transition Override</h2>
-					<p>
-						You can override background transitions per slide by using <code>data-background-transition="slide"</code>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
+var rpc = new easyXDM.Rpc({
+	remote: 'http://www.example.com/my-iframe',
+	container: iframeContainer,
+	props: {
+		id: 'bug-iframe',
+		frameborder: '0',
+		scrolling: 'no',
+		allowTransparency: 'true',
+		style: {
+			height: '100%',
+			width: '100%',
+			display: 'block'
+		}
+	}
+},
+{
+	local: {
+        parentInfo: function () {
+        	return {
+        		width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+        		height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+        		url: window.location.href
+        	};
+        }
     }
-  }
-}
+});
 					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
 
 				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
+					<h2>... And on the child side</h2>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+var rpc = new easyXDM.Rpc({},
+{
+    remote: {
+        resizeiFrame: {},
+        parentInfo: {}
+    }
+});
+
+.
+.
+.
+
+rpc.parentInfo(function(parentInfo) {
+    var diagObject = {
+        'width' = parentInfo.width,
+        'height' = parentInfo.height,
+        'url' = parentInfo.url
+    }
+});
+					</code></pre>
 				</section>
 
 				<section>
-					<section id="fragments">
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-current-blue">highlight-current-blue</p>
-					</section>
-				</section>
-
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
-
-				<section>
-					<h2>Stellar Links</h2>
+					<h2>Why is Cross Domain Important?</h2>
 					<ul>
-						<li><a href="http://slid.es">Try the online editor</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js">Source code on GitHub</a></li>
-						<li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>
+						<li>Can be used to embed foreign services within your website, webapp, native app</li>
+						<li>Context aware services will be better when they can communicate with their parent</li>
 					</ul>
 				</section>
 
 				<section>
-					<h1>THE END</h1>
-					<h3>BY Hakim El Hattab / hakim.se</h3>
+					<h2>Further Reading</h2>
+					<img width="831" height="442" src="images/card-ui.png" alt="Card UI">
+					<ul>
+						<li><a href="http://www.subtraction.com/2014/08/26/what-is-a-card/">Card UI</a> is a common design pattern
+							<ul>
+								<li>Twitter</li>
+								<li>Pinterest</li>
+								<li>Google Now</li>
+							</ul>
+						</li>
+						<li><a href="http://cardstack.io">cardstack.io</a> is an open source initiative to create a Card Ecosystem
+							<ul>
+								<li><a href="https://github.com/tildeio/oasis.js">Oasis.js</a> — <q>A lightweight library for embedding untrusted content and exposing capabilities</q></li>
+							</ul>
+						</li>
+					</ul>
 				</section>
+
+				<section>
+					<h2>The End</h2>
+					<p>by <a href="http://www.gbrassey.com">George Brassey</a></p>
+				</section>
+
 
 			</div>
 
